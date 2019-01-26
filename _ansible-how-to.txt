@@ -1,3 +1,8 @@
+COMMENTS: has to start with '#'
+
+BOOLEAN:
+  you can represent a boolean in a list with 'off' , 'no' , 'false'
+
 LIST:
   are being created with a "-" , eg.:
     - bmw 3
@@ -6,6 +11,9 @@ LIST:
     - no
     - 32.7
     
+  # LIST in YAML compressed form look like this:
+  [whatever, 15, 848.2, false, true, AHOJ]
+    
 DICT:
   key1: value1
   key2: value2
@@ -13,7 +21,27 @@ DICT:
   ip_addr: 10.12.13.1
   password: pass123
   username: admin
+  
+  # DICT in YAML compressed format look like this:
+  {key1: value1, key2: value2, key3: value3 }
+  
+DICT with list as values:
+    dict_list: 
+      - list_value1
+      - list_value2
+      - list_value3
+      - 10
+      - true
+
+LIST with dict as items:
+  - ip_addr: 10.10.10.1
+     username: admin
+     password: pass1
+     device_type: cisco
+  -  ip_addr: 10.10.10.2
+     username: admin
+     password: pass2
+     device_type: nxos
+     
     
-BOOLEAN:
-  you can represent a boolean in a list with 'off' , 'no' , 'false'
-    
+
