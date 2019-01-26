@@ -1,0 +1,19 @@
+LIST:
+  are being created with a "-" , eg.:
+    - bmw 3
+    - mercedes e180
+    - audi
+    - no
+    - 32.7
+    
+DICT:
+  key1: value1
+  key2: value2
+  key3: value3
+  ip_addr: 10.12.13.1
+  password: pass123
+  username: admin
+    
+BOOLEAN:
+  you can represent a boolean in a list with 'off' , 'no' , 'false'
+    
