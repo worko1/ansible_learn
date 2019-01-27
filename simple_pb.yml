@@ -1,0 +1,16 @@
+---
+
+- name: Simple PING + Debug
+  hosts: cisco
+  tasks:
+    -  ping:
+    -  debug:
+         msg: "We are pinging the IP address = {{ ansible_host }}"
+    -  debug:
+         msg: "The username is = {{ ansible_user }}"
+    -  debug:
+         msg: "NTP1 = {{ ntp1 }}"
+    -  debug:
+         msg: "NTP2 = {{ ntp2 }}"
+    -  debug:
+         msg: "SNMP community = {{ snmp_community }}"

@@ -1,4 +1,5 @@
 COMMENTS: has to start with '#'
+BASIC TEST: ansible [xxx] -m ping -vvv
 
 BOOLEAN:
   you can represent a boolean in a list with 'off' , 'no' , 'false'
@@ -11,7 +12,7 @@ LIST:
     - no
     - 32.7
     
-  # LIST in YAML compressed form look like this:
+  # LIST in YAML compressed format look like this:
   [whatever, 15, 848.2, false, true, AHOJ]
     
 DICT:
@@ -42,6 +43,61 @@ LIST with dict as items:
      username: admin
      password: pass2
      device_type: nxos
+
+-------------------------------------------------------
+
+INVENTORY:
+	- by default it looks in /etc/ansible/host
+	- Changes can be made and used in a configuration file which will be processed in the following order:
+		1. ANSIBLE_CONFIG (an environment variable)
+		2. ansible.cfg (in the current directory)
+		3. .ansible.cfg (in the home directory)
+		4. /etc/ansible/ansible.cfg
+	
+	- create a local ansible.cfg file in your working directory and edit it:
+		> touch ansible.cfg
+	
+	- 'ansible-hosts' file
+		[local]
+		localhost ansible_connection=local  (do not SSH to device, because it is local)
+		
+VARIABLES:
+	- Group VARs: external variables for specific groups have to be in a relative 
+	  directory called 'group_vars' and specified as [hosts_name].yml file. The filename is 
+	  in other words the name of the group [hosts_name]. E.g. cisco.yml for [cisco]
+	  
+	- HOST VARs: external variables for specific hosts/targets have to be in a relative 
+	  directory called 'host_vars' and subdir called 'hostname'. The variable name is
+	  not to be specific.
+	  
+	- VARs can also be defined insed the playbook itself as:
+		vars:
+		  var1: value1
+		  var2: value2
+		  
+	- VARs can also be gathered from a file as:
+		vars_files:
+		  - my_variables_file.yml
+		  
+	- FACTS: are special variables gathered from the targets. You can get the local
+	  facts as a dictionary by typing 'ansible local -m setup -v' and then use the keys
+	  in your playbook. 
+	  
+SSH-PROBLEMS:
+	- if you always get FATAL with SSH target unreachable, do on the client maschine following:
+		1. ssh first to the remota maschine as 'ssh user@remote_ip'
+		2. ssh-copy-id -i user@localhost
+		3. ssh-copy-id -i user@servers_in_inventory
+		
+	  > If you are not using an SSH manager, run ssh-add and if you get back
+	    'Could not open a connection to your authentication agent.' , 
+		then run > eval $(ssh-agent) 
+		and repeat > ssh-add
+		
+MODULES that need ROOT/SUDO:
+	Add --user=USERNAME --extra-vars "ansible_sudo_pass=PASSWORD" at the end
+	> ansible-playbook modules_pb.yml -i ./ansible-hosts --user=user --extra-vars "ansible_sudo_pass=pas123"
+		
      
     
 

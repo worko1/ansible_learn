@@ -1,0 +1,18 @@
+---
+
+- name: Simple PB
+  hosts: servers
+  become: Yes
+  tasks:
+    -  ping:
+    -  debug:
+         msg: "HALLLLOOO"
+         
+    - name: Install TWISTED PIP module
+      pip:
+        name: twisted
+        
+    - name: Update repositories cache and install "nano" package
+      apt:
+        name: nano
+        update_cache: yes

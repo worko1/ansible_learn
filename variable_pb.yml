@@ -1,0 +1,19 @@
+---
+
+- name: Print out variables
+  hosts: local
+  vars:
+    dns1: 8.8.4.4
+    dns2: 9.9.9.9
+  vars_files:
+    - my_variables.yml
+  tasks:
+    -  ping:
+    -  debug:
+         msg: "The DNS1 is = {{ dns1 }}"
+    -  debug:
+         msg: "The DNS2 is = {{ dns2 }}"
+    -  debug:
+         msg: "The 10 IP address is = {{ ip_address }}"
+    -  debug:
+         msg: "The loca IPv6 gathered as a local FACT is = {{ ansible_all_ipv6_addresses }}"

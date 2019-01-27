@@ -1,0 +1,6 @@
+---
+
+- name: IOS Example
+  hosts: cisco
+  tasks:
+    -  ping:     

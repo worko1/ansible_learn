@@ -1,0 +1,34 @@
+[all:vars]
+# >>Specifies vars for all entries<<
+# 'ansible_connection=local' execs modules againts itself, since the target
+# machines do not have any Python running on them
+ansible_connection=local
+# 'ansible_python_interpreter=' specifies where the Python interpreter is.
+ansible_python_interpreter=/usr/bin/python
+
+[local]
+localhost
+
+[cisco]
+hamburg-sw ansible_host=192.168.219.1
+
+# Variables which correspond to the group
+[cisco:vars]  
+ansible_user=admin
+ansible_ssh_pass=admin
+ansible_connection=network_cli
+ansible_network_os=ios
+# >> command 'ansible cisco -m ping ' .. ping the desired Cisco Switch
+
+
+[servers]
+#remote-deb ansible_host=192.168.219.19
+192.168.219.20
+192.168.219.19
+
+[servers:vars]
+# SMART.. since the rmeote server does have Python, we use the smart option
+ansible_connection=smart
+#username=worko
+#password=kosice
+ansible_python_interpreter=/usr/bin/python
