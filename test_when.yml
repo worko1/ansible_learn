@@ -1,0 +1,39 @@
+---
+
+- name: When Testing
+  hosts: local
+  vars:
+    my_str: whatever
+    version: "Cisco IOS running ver 15.2"
+  
+  tasks:
+    -  name: Hard-coded to False
+       debug:
+         msg: Print's NOT due FALSE
+       when: False
+      
+    -  name: Hardo coded to True
+       debug:
+         msg: Print's out due TRUE
+       when: True
+       
+    -  name: Condition EQUALS
+       debug:
+         msg: Print's out since string equals to condition
+       when: my_str == 'whatever'
+       
+    -  name: Condition NOT EQUALS
+       debug:
+         msg: Print's NOT out since condition doesn't equal to true
+       when: my_str != 'whatever'
+       
+    -  name: Substring in larger string
+       debug:
+         msg: Print's out since condition Cisco IOS is in 'version'
+       when: "'Cisco IOS' in version"
+       
+             
+    -  name: Substring in larger string-2
+       debug:
+         msg: Print's out since 'version' is defined
+       when: version is defined
